@@ -19,6 +19,7 @@
  * @return {string}
  */
 var multiply = function (num1, num2) {
+  // 模拟加法
   const add = (a, b) => {
     if (!a) return b;
     a = a.toString();
@@ -34,6 +35,7 @@ var multiply = function (num1, num2) {
       if (s > 9) {
         dir = 1;
         s = s - 10;
+        // 进位
       } else {
         dir = 0;
       }
@@ -43,6 +45,7 @@ var multiply = function (num1, num2) {
     if (dir) sum = 1 + sum;
     return sum;
   };
+  // 模拟乘法
   const mul = (va, vb) => {
     va = va.toString();
     vb = vb.toString();
@@ -54,6 +57,7 @@ var multiply = function (num1, num2) {
       let val = Number(va[i]) * Number(vb) + Number(dirs);
       if (val > 9) {
         dirs = val.toString()[0];
+        // 进位
         val = val.toString()[1];
       }else {
         dirs = '0';
@@ -68,6 +72,7 @@ var multiply = function (num1, num2) {
   if (Number(num1) === 0 || Number(num2) === 0) return '0';
   let len = num2.length - 1;
   for (let i = len; i >= 0; i--) {
+    // 累加
     const to = mul(num1, num2[i]) + '0'.repeat(len - i);
     sum = add(sum, to);
   }
