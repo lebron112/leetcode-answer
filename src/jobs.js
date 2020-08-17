@@ -32,4 +32,23 @@ const pullFileIntoDir = () => {
     }
   });
 };
-pullFileIntoDir();
+// pullFileIntoDir();
+
+/** ()括号替换成（）  */
+const replaceBracket = () => {
+  const list = fs.readdirSync(__dirname);
+  list.forEach(item => {
+    const dir = fs.statSync(path.join(__dirname, item));
+    if (!dir.isFile()) {
+      {
+        const res = fs.readdirSync(path.join(__dirname, item));
+        res.forEach(name => {
+          const newName = name.replace('(', '（').replace(')', '）');
+          // console.log(path.join(__dirname, item, newName))
+          fs.renameSync(path.join(__dirname, item, name), path.join(__dirname, item, newName));
+        });
+      }
+    }
+  });
+};
+replaceBracket();
