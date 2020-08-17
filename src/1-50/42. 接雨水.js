@@ -72,10 +72,48 @@ var trap = function (height) {
   return sum;
 };
 let d = '--------------';
-console.log(d, trap([8, 8, 1, 5, 6, 2, 5, 3, 3, 9])); // 0, 4 , 6, 9 // 31
-console.log(d, trap([5, 5, 1, 8, 1, 1, 5, 2, 7, 6, 1, 3, 1, 6])); // 0, 3, 6, 8, 10, 12 => 0,3,8, 12 // 36
-console.log(d, trap([5, 5, 1, 7, 1, 1, 5, 2, 7, 6])); // 0, 3, 6, 8 => 0,3,8 //23
-console.log(d, trap([5, 2, 1, 2, 1, 5])); // 0, 2, 4 // 14
-console.log(d, trap([5, 4, 1, 2])); //0,3 // 1
-console.log(d, trap([2, 0, 2])); // 0 ,2 //2
-console.log(d, trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))  // 1,3,7,10 //6
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+// 双指针解法， 只需循环一次，且占用内存更小
+const trap2 = (height) => {
+  // 基础的错误处理
+  if (height.length < 2) return 0;
+  let total = 0;
+  // 2个指针
+  let left = 0;
+  let right = height.length - 1;
+  // // 记录右边最大和左边最大值
+  let leftMax = height[left];
+  let rightMax = height[right];
+  
+  while (left !== right) {
+    const lef = height[left];
+    const righ = height[right];
+    // 取左右2侧的小值为最大
+    const max = Math.min(leftMax, rightMax);
+    // 更新最大值
+    leftMax = Math.max(leftMax, lef);
+    rightMax = Math.max(rightMax, righ);
+    // 判断 如果左边大 则右指针左移， 反之 左指针右移  直到指针相遇
+    if (lef <= righ) {
+      if (max > lef) total += max - lef;
+      left++;
+    } else {
+      if (max > righ) total += max - righ;
+      right--;
+    }
+  }
+  return total;
+};
+
+console.log(d, trap2([8, 8, 1, 5, 6, 2, 5, 3, 3, 9])); // 0, 4 , 6, 9 // 31
+console.log(d, trap2([5, 5, 1, 8, 1, 1, 5, 2, 7, 6, 1, 3, 1, 6])); // 0, 3, 6, 8, 10, 12 => 0,3,8, 12 // 36
+console.log(d, trap2([5, 5, 1, 7, 1, 1, 5, 2, 7, 6])); // 0, 3, 6, 8 => 0,3,8 //23
+console.log(d, trap2([5, 2, 1, 2, 1, 5])); // 0, 2, 4 // 14
+console.log(d, trap2([5, 4, 1, 2])); //0,3 // 1
+console.log(d, trap2([2, 0, 2])); // 0 ,2 //2
+console.log(d, trap2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))  // 1,3,7,10 //6
