@@ -70,20 +70,30 @@ var findSubstring = function (s, words) {
 const findSubstring2 = (s, words) => {
   const len = words.join('').length;
   const res = [];
+  // 基础情况处理
   if (!s || !words.length) return res;
+  // 存储把字符串全部拼接起来的字符串
   const sortWords = words.sort().join('');
+  // 记录第一个字符串的长度
   const length = words[0].length;
+  // 序号
   for (let i = 0; i < s.length; i++) {
+    // 截取一段最长子串连接后的长度
     let str = s.substr(i, len);
+    // 如果剩余字符串长度比 第一个子串还小的情况 则跳出循环
     if (str.length < len) break;
     let arr = [];
+    // 截取字符串长度
     while(str){
+      // 截取length 长度的字符串 丢入数组中 并把截剩下的字符串赋值给str
       let wo = str.substr(0, length);
       arr.push(wo);
       str = str.slice(length);  
     }
+    // 把数组内的字符串排序后拼接成一个字符串
     const newStr = arr.sort().join('');
     arr = null;
+    // 判断新组成的字符串 和所有子串组合起来的新字符串相等 即可
     if (newStr === sortWords) {
       res.push(i);
     }
