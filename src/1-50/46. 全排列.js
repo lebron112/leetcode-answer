@@ -21,7 +21,7 @@
  * @return {number[][]}
  */
 
-//  递归
+//  递归或回溯
 var permute = function (nums) {
   const result = [];
   if (nums.length === 1) result.push(nums);
@@ -32,12 +32,16 @@ var permute = function (nums) {
     if (arr.length > 2) {
       const copy = [...arr];
       for (let i = 0; i < copy.length; i++) {
+        // 拆分 头和后面的数字进行排列
         const [head] = copy.splice(i, 1);
         copy.unshift(head);
+        // 递归调用
         const resIn = mulSort(head, copy.slice(1));
+        // 对每一项进行最前插入头
         res.push(...resIn.map(item => [start, ...item]));
       }
     } else {
+      // 低于或等于2个的时候进行全排序
       while (i < arr.length) {
         let head = arr.shift();
         arr.push(head);
