@@ -41,55 +41,33 @@ var merge = function (intervals) {
   }
   return intervals;
 };
-
-// const sort = (arr, left = 0, right = arr.length - 1) => {
-//   if (left >= right) return;
-//   let l = left;
-//   let r = right;
-//   const baseVal = arr[r];
-//   while (l < r) {
-//     while (l < r && arr[l] <= baseVal) {
-//       l++;
-//     }
-//     arr[r] = arr[l];
-//     while (l < r && arr[r] >= baseVal) {
-//       r--;
-//     }
-//     arr[l] = arr[r];
-//   }
-//   arr[r] = baseVal;
-//   sort(arr, left, r - 1);
-//   sort(arr, r + 1, right);
-//   return arr;
-// };
-
-const sortMerge = (arr, left = 0, right = arr.length - 1, baseItem = arr[0]) => {
-  // 取第一个数作为基准数
+// 快速排序
+const sortMerge = (arr, left = 0, right = arr.length - 1) => {
   if (left >= right) return;
   // 2头双指针
   let i = left;
   let j = right;
+  // 取第一个数作为基准数
+  let baseItem = arr[left];
   while (i < j) {
-    // 一个指针从左边开始
-    while (i < j && arr[i] < baseItem) {
-      i++;
-    }
-    // 遇到比基准数小的交换左右位置
-    arr[i] = arr[j];
-    // 另一指针从右边开始
-    while( i < j && arr[j] >= baseItem) {
+    while (i < j && arr[j][0] >= baseItem[0]) { // 另一指针从右边开始 将大的值放右边 小的值放左边     
       j--;
     }
-    // 
     arr[i] = arr[j];
-    
+    while (i < j && arr[i][0] < baseItem[0]) { // 一个指针从左边开始将大的值放右边 小的值放左边    
+      i++;
+    }
+    arr[j] = arr[i];// 遇到比基准数小的交换左右位置    
   }
-
+  arr[j] = baseItem;   //找出大值以后 将基准值放中间 
+  sortMerge(arr, left, j - 1); // 将基准值左边的进行排序
+  sortMerge(arr, j + 1, right); // 将基准值右边的进行排序
+  return arr;
 };
 
-console.log(merge([[1, 3], [2, 6], [8, 10], [15, 18]]));
-console.log(merge([[1, 4], [0, 4]]));
-console.log(merge([[2, 3], [5, 5], [2, 2], [3, 4], [3, 4]]));
+// console.log(merge([[1, 3], [2, 6], [8, 10], [15, 18]]));
+// console.log(merge([[1, 4], [0, 4]]));
+// console.log(merge([[2, 3], [5, 5], [2, 2], [3, 4], [3, 4]]));
+// console.log(sortMerge([[1, 4], [0, 4]]));
+console.log(sortMerge([[7, 13], [5, 8], [2, 2], [3, 5], [6, 9]]));
 
-const res = [12, 5, 6, 78, 59, 54, 2, 48, 90, 38];
-console.log(sortMerge(res[0]));

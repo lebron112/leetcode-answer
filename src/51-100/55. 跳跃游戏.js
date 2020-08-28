@@ -29,9 +29,10 @@ var canJump = function (nums) {
     let num = nums[i];
     // 攒的能量不足以到下一步 就直接跳出循环
     if (i > sum) return false;
-    if (i < nums.length - 1 && num > sum && sum + num > nums.length - 1) return true;
-    // 攒的能量等于最远能够到达的步数
+    // 跳跃攒的能量等于最远能够到达的步数
     sum = Math.max(sum, i + num);
+    // 在没到终点时能量总和大于长度 说明一定可以到达 直接跳出循环 
+    if (i < nums.length - 1 && sum > nums.length - 1) return true;
   }
   return true;
 };
