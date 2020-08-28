@@ -25,7 +25,7 @@ intervals[i][0] <= intervals[i][1]
 // 暴力法 先排序 里面每一项
 var merge = function (intervals) {
   // 排序
-  intervals.sort((a, b) => a[0] - b[0]);
+  intervals.sort((a, b) => a[0] - b[0] );
   // 进行递归
   for (let i = 0; i < intervals.length; i++) {
     const [preSt, preEt] = intervals[i];
@@ -69,5 +69,5 @@ const sortMerge = (arr, left = 0, right = arr.length - 1) => {
 // console.log(merge([[1, 4], [0, 4]]));
 // console.log(merge([[2, 3], [5, 5], [2, 2], [3, 4], [3, 4]]));
 // console.log(sortMerge([[1, 4], [0, 4]]));
-console.log(sortMerge([[7, 13], [5, 8], [2, 2], [3, 5], [6, 9]]));
+console.log(merge([[7, 13], [5, 8], [2, 2], [3, 5], [6, 9]]));
 
