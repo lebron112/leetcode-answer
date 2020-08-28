@@ -42,28 +42,54 @@ var merge = function (intervals) {
   return intervals;
 };
 
-const sort = (arr, left = 0, right = arr.length - 1) => {
+// const sort = (arr, left = 0, right = arr.length - 1) => {
+//   if (left >= right) return;
+//   let l = left;
+//   let r = right;
+//   const baseVal = arr[r];
+//   while (l < r) {
+//     while (l < r && arr[l] <= baseVal) {
+//       l++;
+//     }
+//     arr[r] = arr[l];
+//     while (l < r && arr[r] >= baseVal) {
+//       r--;
+//     }
+//     arr[l] = arr[r];
+//   }
+//   arr[r] = baseVal;
+//   sort(arr, left, r - 1);
+//   sort(arr, r + 1, right);
+//   return arr;
+// };
+
+const sortMerge = (arr, left = 0, right = arr.length - 1, baseItem = arr[0]) => {
+  // 取第一个数作为基准数
   if (left >= right) return;
-  let l = left;
-  let r = right;
-  const baseVal = arr[r];
-  while (l < r) {
-    while (l < r && arr[l] <= baseVal) {
-      l++;
+  // 2头双指针
+  let i = left;
+  let j = right;
+  while (i < j) {
+    // 一个指针从左边开始
+    while (i < j && arr[i] < baseItem) {
+      i++;
     }
-    arr[r] = arr[l];
-    while (l < r && arr[r] >= baseVal) {
-      r--;
+    // 遇到比基准数小的交换左右位置
+    arr[i] = arr[j];
+    // 另一指针从右边开始
+    while( i < j && arr[j] >= baseItem) {
+      j--;
     }
-    arr[l] = arr[r];
+    // 
+    arr[i] = arr[j];
+    
   }
-  arr[r] = baseVal;
-  sort(arr, left, r - 1);
-  sort(arr, r + 1, right);
-  return arr;
+
 };
+
 console.log(merge([[1, 3], [2, 6], [8, 10], [15, 18]]));
 console.log(merge([[1, 4], [0, 4]]));
 console.log(merge([[2, 3], [5, 5], [2, 2], [3, 4], [3, 4]]));
 
-console.log(sort([12, 5, 6, 78, 59, 54, 2, 48, 90, 38]))
+const res = [12, 5, 6, 78, 59, 54, 2, 48, 90, 38];
+console.log(sortMerge(res[0]));
