@@ -42,7 +42,7 @@ var rotateRight = function (head, k) {
   let i = 0;
   let store = head;
   let start = null;
- 
+
   while (i < k) {
     // 用一个变量记住选择一次需要最少需要几次
     let t = 1;
@@ -50,7 +50,7 @@ var rotateRight = function (head, k) {
     let origin = new ListNode(store.val);
     // start指针保存 该新建链的引用
     start = origin;
-    t ++;
+    t++;
     store = store.next;
     if (store) {
       while (store.next) {
@@ -60,6 +60,7 @@ var rotateRight = function (head, k) {
         origin = next;
         store = store.next;
       }
+
       origin = new ListNode(store.val);
       origin.next = start;
       store = origin;
@@ -75,7 +76,42 @@ var rotateRight = function (head, k) {
   }
   return store;
 };
-const res = rotateRight(
+var rotateRight2 = function (head, k) {
+  if (!head || !k) return head;
+  let i = 0;
+  let store = head;
+  while (i < k) {
+    let t = 1;
+    const tmp = store;
+    if (store) {
+      loopIn: while (store.next) {
+        t++;
+        const st = store.next;
+        // 直接找到链表末尾，并让链表前一个的next指针置为null 把链表尾置为头，倒转即可
+        if (st && !st.next) {
+          const val = store.next.val;
+          store.next = null;
+          const out = new ListNode(val);
+          out.next = tmp;
+          store = out;
+          break loopIn;
+        } else {
+          store = store.next;
+
+        }
+      }
+    } else {
+      return head;
+    }
+    if (k > t) {
+      // 
+      k = k % t + t;
+    }
+    i++;
+  }
+  return store;
+};
+const res = rotateRight2(
   {
     val: 1, next:
     {
@@ -90,7 +126,7 @@ const res = rotateRight(
         }
       }
     }
-  }, 500000002)
-// console.log(rotateRight({ val: 1 }, 1))
+  }, 10);
+console.log(rotateRight2({ val: 1, next: { val: 2} }, 2))
 
 console.log(JSON.stringify(res));
