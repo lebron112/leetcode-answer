@@ -33,44 +33,14 @@ candidates 中的数字可以无限制重复被选取。
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-  let res = [];
-  candidates = candidates.sort((a, b) => b - a);
-  const loop = (startIndex, loopRes, loopTarget) => {
-    let item = candidates[startIndex];
-    if (!item) return;
-    while (loopTarget >= item) {
-      loopTarget -= item;
-      loopRes.push(item);
-    }
-    console.log(loopRes,  loopTarget, item);
-    if (loopTarget === 0) {
-      res.push(loopRes);
-    } else {
-      startIndex++;
-      const next = candidates[startIndex];
-      if (next > loopTarget) {
-        loopRes.pop();
-        loopTarget += item;
-      }
-      loop(startIndex, loopRes, loopTarget);
-    }
-  };
-  for (let i = 0; i < candidates.length; i++) {
-    const item = candidates[i];
-    if (item > target) break;
-    // if (i == 1)
-    loop(i, [], target);
-  }
-  return res;
+  
 };
-console.log(combinationSum([5, 3, 2], 7));
+// console.log(combinationSum([5, 3, 2], 8));
 // console.log(combinationSum([2], 8));
 
-// console.log(combinationSum([4, 3, 2], 24));
+console.log(combinationSum([4, 3, 2], 24));
 
 // console.log(combinationSum([7, 6, 3, 2], 9));
-
-
 // console.log(combinationSum([2, 1], 1));
 // console.log(combinationSum([2, 1], 2));
 // console.log(combinationSum([2, 1], 4));
