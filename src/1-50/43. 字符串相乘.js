@@ -18,6 +18,7 @@
  * @param {string} num2
  * @return {string}
  */
+// 模拟大数的加法 和乘法即可
 var multiply = function (num1, num2) {
   // 模拟加法
   const add = (a, b) => {

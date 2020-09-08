@@ -78,7 +78,9 @@ let d = '--------------';
  * @return {number}
  */
 
-// 双指针解法， 只需循环一次，且占用内存更小
+// 双指针 + 动态规划  只需循环一次，且占用内存更小
+// 类似11题 从左右两边开始 初始记录最左和最右的最大值  2边比较小的那个数字往中间移动，并更新原来记录的最大值，
+// 并取2个记录值的小的那一个值， 移动时减去每一项之后的和累计  就是可剩的雨水面积
 const trap2 = (height) => {
   // 基础的错误处理
   if (height.length < 2) return 0;
@@ -93,7 +95,7 @@ const trap2 = (height) => {
   while (left !== right) {
     const lef = height[left];
     const righ = height[right];
-    // 取左右2侧的小值为最大
+    // 取左右2侧的小值为最大可接高度
     const max = Math.min(leftMax, rightMax);
     // 更新最大值
     leftMax = Math.max(leftMax, lef);
