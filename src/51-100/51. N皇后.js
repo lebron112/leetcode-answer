@@ -36,11 +36,13 @@ n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，�
  * @param {number} n
  * @return {string[][]}
  */
+// 回溯
 var solveNQueens = function (n) {
+  // 记录结果
   const hashStore = {};
-  // 记忆化的序列 能大大减少运行时间
+  // 记忆化序列 能大大减少运行时间
   const hasHas = {};
-  // 初始化空棋牌的
+  // 初始化空棋牌的 [['.','.',','],...]
   const mountRes = (n) => {
     let res = [];
     for (let i = 0; i < n; i++) {
@@ -48,7 +50,7 @@ var solveNQueens = function (n) {
     }
     return res;
   };
-  // 判断是否可以正确摆放
+  // 判断是否可以正确摆放旗子
   const checkQueen = (result, row) => {
     const lastQueenIndex = result[row].indexOf('Q');
     // 竖线↑
@@ -94,6 +96,7 @@ var solveNQueens = function (n) {
     for (; y < n; y++) {
       result[y][x] = 'Q';
       hasTry = true;
+      // 已经到最后一行 x超出长度
       if (hasTry && y === n - 1 && x > n - 1) {
         break;
       }
@@ -101,6 +104,7 @@ var solveNQueens = function (n) {
         storeIndex.push(x);
         x = 0;
       } else {
+        // 检查成功直接存入
         if (checkQueen(result, y)) {
           storeIndex.push(x);
           x = 0;
@@ -125,6 +129,7 @@ var solveNQueens = function (n) {
         }
       }
     }
+    // 能够执行到最后一层 说明有结果 记录结果并返回结果值
     if (storeIndex.length === n) {
       hashStore[storeIndex.join('-')] = result.map(item => item.join(''));
       return storeIndex;
@@ -136,9 +141,12 @@ var solveNQueens = function (n) {
     if (storeIndex.length < n) {
       let x = storeIndex.length ? (storeIndex[storeIndex.length - 1] + 1) : 0;
       for (; x < n; x++) {
+        // 检查是否有结果
         const res = checkOut(x, n, mountRes(n), storeIndex);
+        // 如果有结果
         if (res) {
           for (let i = storeIndex.length + 1; i < res.length; i++) {
+            // 左右2边进行翻转 再尝试
             const a = res.slice(0, i);
             const cv = [...res].reverse();
             const b = cv.slice(0, i);

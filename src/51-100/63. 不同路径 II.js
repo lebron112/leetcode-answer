@@ -79,7 +79,7 @@ var uniquePathsWithObstacles = function (obstacleGrid) {
 // 动态规划
 // 解法和62 64类似
 // 先算出第一横和第一纵列的解 对于障碍物遇到1就记为0，并且比较上一格是否也是0  判断最终有路径能到达该点即可
-// 双层循环即可，如果当前索引位置是障碍物 则直接记录该索引位位1 如果不是则当前索引位的值等于 纵方向上一格 + 横方向上一格 的和
+// 双层循环即可，如果当前索引位置是障碍物 则直接记录该索引位为0 如果不是则当前索引位的值等于 纵方向上一格 + 横方向上一格 的和
 var uniquePathsWithObstacles2 = (obstacleGrid) => {
   const col = obstacleGrid[0].length - 1;
   const row = obstacleGrid.length - 1;
