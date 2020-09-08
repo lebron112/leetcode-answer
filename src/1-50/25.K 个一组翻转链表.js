@@ -33,25 +33,25 @@ function ListNode(val) {
  * @return {ListNode}
  */
 var reverseKGroup = function (head, k) {
-  if(!head) return head;
+  if (!head) return head;
   const m = (list) => {
-    if(!list.next) return list;
+    if (!list.next) return list;
     let i = 0;
     let od = list;
     let x = list;
     const arr = [];
-    while(i < k && od){
+    while (i < k && od) {
       arr.push(od.val);
       od = od.next;
       i++;
     }
-    if(arr.length === k){
-      while(arr.length){
+    if (arr.length === k) {
+      while (arr.length) {
         x.val = arr.pop();
         x = x.next;
       }
       return x && m(x);
-    }      
+    }
   };
   m(head);
   return head;
