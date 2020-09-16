@@ -25,7 +25,7 @@
  * @param {number} target
  * @return {boolean}
  */
-// 同33题 2分查找 多了一次去重的计算
+// 同33题 2分查找 多了一次去重的操作
 // 即起始位的数字 和末索引位的数字 相同，则 尾索引一直减
 // 第二种情况 倒数第一个数字和倒数第二个 数字相同 再缩减范围即可
 var search = function (nums, target) {
