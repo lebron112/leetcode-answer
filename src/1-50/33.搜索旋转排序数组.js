@@ -25,20 +25,25 @@
 const search = function (nums, target) {
   return nums.indexOf(target);
 };
-// 二分搜索
+// 二分搜索 递归
+// 取一个中间值 中间值等于 1段区间内中间的那个数字
+// 如果起始数字大于等于末尾数字 则找不到
+// 如果目标值 大于起始位置且小于中间位置 取前面部分递归查找
+// 如果起始位置大于中间值,且 中间值比目标值小 说明前半部分进行了翻转  后面部分是顺序排列的
+// 或者尾巴数字比目标值小,且 中间值小于尾巴值 说明后面是顺序排列的，一定不在后面部分
+// 如果都不满足上面的情况 那么就从后面那部分找
 const search2 = function (nums, target) {
   const find = (start, end) => {
-    // console.log(start, end)
+    // 取中间索引
     const mid = start + Math.floor((end - start) / 2);
     if (nums[mid] === target) return mid;
-    if (nums[end] === target) return end;
-    if (nums[start] === target) return start;
     if (start >= end) return -1;
     if (target >= nums[start] && target <= nums[mid]) {
       return find(start, mid - 1);
     } else {
-      if (nums[start] > nums[mid] && nums[mid] > target || nums[end] < target && nums[mid] < nums[end]) {
-        return find(start, mid);
+      if (nums[start] > nums[mid] && nums[mid] > target ||
+        nums[end] < target && nums[mid] < nums[end]) {
+        return find(start, mid - 1);
       }
       return find(mid + 1, end);
     }
