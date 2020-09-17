@@ -37,12 +37,15 @@ var merge = function (nums1, m, nums2, n) {
     const pre = nums1[i];
     if (first !== undefined) {
       if (next !== undefined) {
+        // 插入到中间
         if (first >= pre && first <= next) {
           nums1.splice(i + 1, 0, nums2.shift());
         } else if (first <= pre) {
+          // 插入到前面
           nums1.splice(i, 0, nums2.shift());
         }
       } else {
+        // 末尾的时候情况
         first >= pre ? nums1.push(nums2.shift()) :
          nums1.splice(i, 0, nums2.shift());
       }
