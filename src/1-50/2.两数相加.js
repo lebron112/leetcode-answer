@@ -10,6 +10,7 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
+// 转为数组 倒序相加 然后再转为链表
 const addTwoNumbers = function (l1, l2) {
   function toArr(obj) {
     const arr = [];
