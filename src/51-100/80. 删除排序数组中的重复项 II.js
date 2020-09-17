@@ -40,7 +40,7 @@ for (int i = 0; i < len; i++) {
  * @param {number[]} nums
  * @return {number}
  */
-// 已排好序一个变量记录当前值 一个变量记录出现次数
+// 已排好序一个变量记录当前值 一个变量记录出现次数 如果大于2 原地删除
 var removeDuplicates = function (nums) {
   let curNum = nums[0];
   let times = 1;
