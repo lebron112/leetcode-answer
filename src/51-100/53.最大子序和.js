@@ -13,6 +13,10 @@
  * @param {number[]} nums
  * @return {number}
  */
+// 动态规划问题
+// 利用一个变量记录连续的和 另一个记录最大的值
+// 一次循环即可 如果上次连续和大于0 再加上当前索引的数字  否则从把当前数字作为初始值 并重新新开始计算连续和
+// 最后比较最大值和连续值和即可
 var maxSubArray = function (nums) {
   let currentSum = nums[0],
     maxSum = nums[0];

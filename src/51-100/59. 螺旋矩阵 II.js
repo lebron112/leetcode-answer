@@ -17,7 +17,8 @@
  * @param {number} n
  * @return {number[][]}
  */
-// 
+// 回溯 
+// 先定义4个边界 每到头则进行转向 并且原来行进方向的边界+1 下次再转向到的时候不越界即可
 var generateMatrix = function (n) {
   if (n === 1) return [[1]];
   if (n === 2) return [[1, 2], [4, 3]];

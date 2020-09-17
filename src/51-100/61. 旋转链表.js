@@ -36,7 +36,7 @@ function ListNode(val) {
   this.val = val;
   this.next = null;
 }
-
+// 对选择次数要进行取模 最少旋转执行 head 深度 + k % (head 深度)次
 var rotateRight = function (head, k) {
   if (!head || !k) return head;
   let i = 0;
@@ -76,6 +76,9 @@ var rotateRight = function (head, k) {
   }
   return store;
 };
+// 优化后的方法
+// 解题思路 循环到链的倒数第二深， 把倒数第二个置为空  把倒数第一个的next指向原来那个更新后的链 
+// 重复上述步骤  也是最少旋转执行 head 深度 + k % (head 深度)次
 var rotateRight2 = function (head, k) {
   if (!head || !k) return head;
   let i = 0;
@@ -97,7 +100,6 @@ var rotateRight2 = function (head, k) {
           break loopIn;
         } else {
           store = store.next;
-
         }
       }
     } else {

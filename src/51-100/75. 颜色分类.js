@@ -42,7 +42,7 @@ var sortColors = function (nums) {
 };
 // 3路快速排序思路  把 2都往队尾放， 把0往队首放，剩下的一定是1;
 /*
- n长度的数组 假设0有 i个 2有 j 个  那么 i的格式就是n - i - j 
+ n长度的数组 假设0有 i个 2有 j 个  那么 1的个数就是n - i - j 
  */
 var sortColors2 = (nums) => {
   // 记录0的个数
