@@ -19,9 +19,9 @@
  * @return {number}
  */
 // 看做是84题的变形题目
-// 初始化用一个height 第一行的值
+// 初始化用一个height 记录第一行的高度值
 // 接下来每一行遇到1就在原索引上+1 否则置为0
-// 算出height后计算高度
+// 用84题的方法 算出 height后计算高度 记录面积最大的那个 
 var maximalRectangle = function (matrix) {
   if (!matrix.length) return 0;
   let max = 0;
