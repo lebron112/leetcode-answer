@@ -38,17 +38,31 @@
  * @param {number} n
  * @return {number[]}
  */
+// 循环遍历即可
+// 0 => ['0'] 1=>['0', '1'] 2=> ['00','01','11','10'] 
+// 每下一个值 倒序遍历 n -1,并在每一个前面插入0  在去掉第一个最字符 然后前面插入 1  依次丢入队列即可 
+// 最后转10进制
 var grayCode = function (n) {
-  let res = ['0'];
-  const loop = (index, list) => {
-    if (index === 0) return ['0'];
-    if (index === 1) return ['0', '1'];
-    for (let i = 1; i < list.length; i++) {
-      
+  let res = [];
+  n >= 0 && res.push('0');
+  n >= 1 && res.push('1');
+  let loopIndex = 1;
+  while (loopIndex < n) {
+    // 前插0
+    const copyRes = [...res.map(item => '0' + item)];
+    const next1 = [];
+    for (let i = copyRes.length - 1; i >= 0; i--) {
+      // 前插1
+      next1.push('1' + copyRes[i].slice(1));
     }
-  };
-
+    res = copyRes.concat(next1);
+    loopIndex++;
+  }
+  // 转10进制
+  return res.map(item => parseInt(item, 2));
 };
+// console.log(grayCode(0));
+// console.log(grayCode(1));
 console.log(grayCode(2));
 console.log(grayCode(3));
 console.log(grayCode(4));
