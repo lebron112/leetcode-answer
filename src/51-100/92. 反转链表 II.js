@@ -34,15 +34,19 @@ function ListNode(val) {
 var reverseBetween = function (head, m, n) {
   if (!head || m === n) return head;
   let index = 1;
+  // 如果第一个节点开始反转
   if (m === 1) {
     let res = new ListNode(head.val);
     head = head.next;
+    // last指向最外层
     let last = res;
     while (head) {
+      // 找到当前深度了，此时last在链的底部，last的下一个节点就是剩下的链
       if (index === n) {
         last.next = head;
         return res;
       } else {
+        // 没到指定深度 则进行反转
         const next = new ListNode(head.val);
         head = head.next;
         next.next = res;
@@ -52,12 +56,16 @@ var reverseBetween = function (head, m, n) {
     }
     return res;
   } else {
+    // 保值原指针
     let out = head;
     while (head.next) {
+      // 当前链的深度+1 等于要开始反转的链深度时
       if (index + 1 === m) {
+        // 进行递归
         head.next = reverseBetween(head.next, 1, n - index);
         return out;
       } else {
+        // 否则一直深入下一个链
         head = head.next;
         index++;
       }
