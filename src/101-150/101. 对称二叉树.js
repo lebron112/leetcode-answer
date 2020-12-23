@@ -24,6 +24,7 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
+// 递归
 var isSymmetric = function (root) {
   if (!root) return true;
   // 使用递归 判断左右是否相等

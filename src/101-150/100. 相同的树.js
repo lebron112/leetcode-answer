@@ -45,6 +45,7 @@
  * @param {TreeNode} q
  * @return {boolean}
  */
+// 递归判断即可
 var isSameTree = function (p, q) {
   // 递归判断 左右值一样
   if (p === null && q === null) {
