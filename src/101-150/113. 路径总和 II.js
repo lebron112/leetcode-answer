@@ -22,7 +22,7 @@
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/path-sum-ii
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 */
-
+const { arrToTree } = require('../utils');
 //   Definition for a binary tree node.
 function TreeNode(val) {
   this.val = val;
@@ -34,6 +34,11 @@ function TreeNode(val) {
  * @param {number} sum
  * @return {number[][]}
  */
-var pathSum = function (root, sum) {
-
+const pathSum = (root, sum) => {
+  const res = [];
+  const reduceMap = (left, right, val) => {
+    
+  };
+  return;
 };
+console.log(arrToTree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1]));//[[5,4,11,2], [5,8,4,5]]

@@ -20,7 +20,7 @@
  * @param {number[]} nums
  * @return {number}
  */
-// hash存储
+// hash存储【
 var singleNumber = function (nums) {
   const hashStore = {};
   for (let i = 0; i < nums.length; i++) {
