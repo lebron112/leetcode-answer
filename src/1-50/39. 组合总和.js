@@ -58,7 +58,7 @@ var combinationSum = function (candidates, target) {
     } else {
       const total = sum + item;
       if (total < target) {
-         // 进行dfs
+        // 进行dfs
         for (let i = index; i < candidates.length; i++) {
           dfs([...arr, item], i, total);
         };
@@ -77,10 +77,31 @@ var combinationSum = function (candidates, target) {
   }
   return res;
 };
-console.log(combinationSum([5, 3, 2], 7));
-console.log(combinationSum([5, 3, 2], 8));
-console.log(combinationSum([7, 6, 3, 2], 7));
-console.log(combinationSum([3, 5, 8], 11));
+/* 方法二 官方解题
+  解题思路 剪枝
+ */
+const combinationSum2 = (candidates, target) => {
+  const res = [];
+  const dfs = (arr, total, index) => {
+    if (index === candidates.length) return;
+    if (total === 0) {
+      res.push(arr);
+    } else {
+      dfs(arr, total, index + 1);
+      const cure = candidates[index];
+      if (total - cure >= 0) {
+        dfs([...arr, cure], total - cure, index);
+      }
+    }
+  };
+  dfs([], target, 0);
+  return res;
+};
+
+console.log(combinationSum2([5, 3, 2], 7));
+// console.log(combinationSum2([5, 3, 2], 8));
+// console.log(combinationSum2([7, 6, 3, 2], 7));
+console.log(combinationSum2([3, 5, 8], 11));
 // console.log(combinationSum([2], 8));
 
 // console.log(combinationSum([4, 3, 2], 24));

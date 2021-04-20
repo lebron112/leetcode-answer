@@ -38,6 +38,11 @@ const arrToTree = (array) => {
   return tree;
 };
 
+const testFn = (fn, ...args) => {
+  console.log(fn(...args));
+};
+
 module.exports = {
   arrToTree,
+  testFn,
 };
