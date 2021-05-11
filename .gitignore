@@ -1,0 +1,18 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# production
+/for-offer
+
+# misc
+.DS_Store
+npm-debug.log*
+*.xml
+*.iml
+.idea
+node_modules
+.vscode
+package-lock.json
+.eslintignore
