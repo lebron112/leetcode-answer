@@ -50,3 +50,37 @@
   mapNode(root, 0);
   return res.flat();
 };
+
+var levelOrder2= function (root) {
+  let result = [];
+  const mapNode = (root, index) => {
+    if (root) {
+      if (!result[index]) {
+        result[index] = [];
+      }
+      const { val, left, right } = root;
+      result.push(val);
+      map(left, index + 1);
+      map(right, index + 1);
+    }
+  };
+  mapNode(root, 0);
+  return result;
+};
+
+var levelOrder3= function (root) {
+  const res = [];
+  const mapNode = (node, i) => {
+    if (node) {
+      const { val, left, right } = node;
+      if (!res[i]) {
+        res[i] = []
+      }
+      i % 2 ? res[i].unshift(val) : res[i].push(val);
+      mapNode(left, i + 1);
+      mapNode(right, i + 1);
+    }
+  };
+  mapNode(root, 0);
+  return res;
+};
