@@ -37,7 +37,7 @@
 const { testFn } = require('../utils');
 var verifyPostorder = function (postorder) {
   if (postorder.length < 2) return true;
-  let i = 0;
+  let i = 0; 
   const len = postorder.length - 1;
   const root = postorder[len];
   for (; i < len; i++) {
