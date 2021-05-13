@@ -36,15 +36,19 @@ var reverseKGroup = function (head, k) {
   if (!head) return head;
   const m = (list) => {
     if (!list.next) return list;
+    // 一个索引记录
     let i = 0;
     let od = list;
     let x = list;
     const arr = [];
+    // 判断是否到了要翻转k次
     while (i < k && od) {
+      // 数组记录每个值
       arr.push(od.val);
       od = od.next;
       i++;
     }
+    // k次了，进行翻转，从数组里去出最有个放到头 递归
     if (arr.length === k) {
       while (arr.length) {
         x.val = arr.pop();
@@ -67,5 +71,5 @@ const toListNode = (arr) => {
   return res;
 
 }
-// console.log(reverseKGroup(toListNode([1, 2, 3, 4, 5]), 3));
+console.log(reverseKGroup(toListNode([1, 2, 3, 4, 5]), 3));
 console.log(reverseKGroup(toListNode([1, 2]), 2));
