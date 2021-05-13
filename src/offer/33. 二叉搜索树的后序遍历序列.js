@@ -16,7 +16,7 @@
    2     6
   / \   / \
  1   3 4   7
- 
+ [1,3,2,4,7,6,5] true
 输入: [1,3,2,6,5]
 输出: true
 
@@ -27,9 +27,30 @@
  * @param {number[]} postorder
  * @return {boolean}
  */
-// 二叉搜索树的左子树均小于根节点，右子树均大于根节点。
-var verifyPostorder = function (postorder) {
-  const stack = [];
-  const root = stack.pop();
 
+// 二叉搜索树的左子树均小于根节点，右子树均大于根节点。
+// 先找出跟节点，即最后一个，
+// 然后找出左子树和右子树, 右子树是循环开始,找到一个比跟节点大的 就是右子树
+// 然后判断右子树的值全部大于跟节点集合,
+// 满足条件就继续递归
+// 直到没有或只有一个是根节点, 直接true
+const { testFn } = require('../utils');
+var verifyPostorder = function (postorder) {
+  if (postorder.length < 2) return true;
+  let i = 0;
+  const len = postorder.length - 1;
+  const root = postorder[len];
+  for (; i < len; i++) {
+    if (postorder[i] > root) break;
+  }
+  const left = postorder.slice(0, i);
+  const right = postorder.slice(i, len);
+  const isOk = right.every(item => item > root);
+  if (isOk) {
+    return verifyPostorder(left) && verifyPostorder(right);
+  } else {
+    return false;
+  }
 };
+testFn(verifyPostorder, [1, 3, 2, 4, 7, 6, 5]);
+testFn(verifyPostorder, [1, 3, 2, 6, 5]);
