@@ -34,6 +34,17 @@ var lengthOfLongestSubstring = function (s) {
   let arr = [];
   let max = 1, i = 0, j = 0;
   while (i < s.length && j < s.length) {
+    // console.log(arr)
+    /*
+      p
+      pw
+      w
+      w
+      wk
+      wke
+      k
+      e 
+     */
     if (!arr.includes(s[i])) {
       arr.push(s[i]);
       max = Math.max(max, arr.length);
