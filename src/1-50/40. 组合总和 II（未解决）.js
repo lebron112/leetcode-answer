@@ -40,7 +40,7 @@ candidates 中的每个数字在每个组合中只能使用一次。
 var combinationSum2 = function (candidates, target) {
   const res = [];
   candidates.sort((a, b) => a - b);
-  console.log(candidates);
+  // console.log(candidates);
   const dfs = (total, arr, i) => {
     if (i === candidates.length) return;
     if (total === 0) {
@@ -49,7 +49,7 @@ var combinationSum2 = function (candidates, target) {
       dfs(total, arr, i + 1);
       const v = candidates[i + 1];
       if (total - v >= 0) {
-        dfs(total - v, [...arr, v], i );
+        dfs(total - v, [...arr, v], i);
       }
     }
   };
@@ -58,4 +58,5 @@ var combinationSum2 = function (candidates, target) {
 };
 console.log(combinationSum2([5, 3, 2], 7));
 console.log(combinationSum2([3, 5, 8], 11));
-// console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
+console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
+console.log(combinationSum2([2, 5, 2, 1, 2], 5));
