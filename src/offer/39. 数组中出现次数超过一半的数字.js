@@ -40,7 +40,7 @@ var majorityElement = function (nums) {
     }
   }
 };
-// 摩尔投票法 遇见相同就加，否则就减
+// 摩尔投票法 遇见相同就加，否则就减 就是不同的相互抵消
 var majorityElement2 = function (nums) {
   let count = 0;
   let res = 0;
