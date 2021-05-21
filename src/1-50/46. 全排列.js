@@ -62,6 +62,29 @@ var permute = function (nums) {
   }
   return result;
 };
+// 递归过深会导致内存溢出
+const allSort = (arr) => {
+  let res = [];
+  const dfs = (list, index) => {
+    if (list.length === arr.length) {
+      return res.push(list);
+    }
+    for (let i = 0; i <= list.length; i++) {
+      const item = [...list];//[1,2]
+      item.splice(i, 0, arr[index]);
+      dfs(item, index + 1);
+    }
+  };
+  if (arr.length <= 2) {
+    if (arr.length === 1) return [[arr[0]]];
+    return [[arr[0], arr[1]], [arr[1], arr[0]]];
+  }
+  const start = [[arr[0], arr[1]], [arr[1], arr[0]]];
+  start.forEach(item => {
+    dfs(item, 2);
+  })
+  return res;
+};
 console.log(permute([1]));
 console.log(permute([1, 2]));
 console.log(permute([1, 2, 3]));
