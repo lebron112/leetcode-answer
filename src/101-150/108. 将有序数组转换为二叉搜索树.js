@@ -39,6 +39,7 @@ function TreeNode(val) {
  * @param {number[]} nums
  * @return {TreeNode}
  */
+// 二分发， 取一个中间值，左边的为左子树，右边的是右子树，递归即可
 var sortedArrayToBST = function (nums) {
   if (nums.length === 0) return null;
   const make = (st, end) => {

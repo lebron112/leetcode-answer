@@ -29,7 +29,7 @@ function TreeNode(val) {
  * @param {TreeNode} root
  * @return {void} Do not return anything, modify root in-place instead.
  */
-// 非构造新二叉树 而是改变原来的
+// 非构造新二叉树 而是改变原来的，一个取巧的办法，构造一个向右的单链表，然后把原二叉树的左右指向替换掉
 var flatten = function (root) {
   if (!root) return null;
   let head = new TreeNode(root.val);
