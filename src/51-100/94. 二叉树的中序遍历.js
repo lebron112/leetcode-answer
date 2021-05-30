@@ -44,6 +44,37 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal = function(root) {
-    
+// 中序遍历 首先访问左子树，再访问跟子树，最后再访问右子数
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+// 递归
+var inorderTraversal = function (root) {
+  const res = [];
+  const order = (node) => {
+    if (node) {
+      const { left, right, val } = node;
+      order(left);
+      res.push(val);
+      order(right);
+    }
+  };
+  order(root)
+  return res;
+};
+// 迭代
+var inorderTraversal2 = function (root) {
+  const stack = [];
+  const res = [];
+  while (stack.length || root) {
+    while (root) {
+      stack.push(root);
+      root = root.left;
+    }
+    const head = stack.pop();
+    res.push(head.val);
+    root = head.right;
+  }
+  return res;
 };
