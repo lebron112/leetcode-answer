@@ -37,12 +37,20 @@ function TreeNode(val, left, right) {
   this.left = (left === undefined ? null : left)
   this.right = (right === undefined ? null : right)
 }
-
+// 二叉搜索树，左子树小于根节点，右字数大于跟节点
 /**
  * @param {number} n
  * @return {TreeNode[]}
  */
 var generateTrees = function (n) {
-  if (n === 0) return TreeNode();
-  
+  if (n === 0) return [];
+  const getBSTtrees = (n, dist) => {
+    const res = [];
+    let node = null;
+    for (let i = 1; i <= n; i++) {
+      const leftNodes = getBSTtrees(i - 1, dist);
+      const rightNodes = getBSTtrees(n - i, dist + i);
+    }
+  };
+  return getBSTtrees(n, 0)
 };
