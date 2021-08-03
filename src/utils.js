@@ -5,7 +5,7 @@ class TreeNode {
   }
 }
 /** 数组转二叉树  */
-const arrToTree = (array) => {
+const arr2Tree = (array) => {
   if (!Array.isArray(array)) {
     throw new Error('deserialize(): expect parameter to be an array, actual: ' + typeof array);
   }
@@ -38,6 +38,10 @@ const arrToTree = (array) => {
   return tree;
 };
 
+const tree2Arr = (tree) => {
+
+};
+
 const testFn = (fn, ...args) => {
   console.log(fn(...args));
 };
@@ -47,7 +51,9 @@ class Node {
     this.next = null;
   }
 }
-const arrToNode = (array) => {
+
+/** 数组转链表 */
+const arr2Node = (array) => {
   if (!array.length) return null;
   let next = new Node(array.shift());
   let head = next;
@@ -59,7 +65,8 @@ const arrToNode = (array) => {
   return head;
 }
 
-const nodeToArr = (node) => {
+/** 链表转数组 */
+const node2Arr = (node) => {
   const res = [];
   while (node) {
     res.push(node.val);
@@ -69,8 +76,8 @@ const nodeToArr = (node) => {
 };
 
 module.exports = {
-  nodeToArr,
-  arrToNode,
-  arrToTree,
+  node2Arr,
+  arr2Node,
+  arr2Tree,
   testFn,
 };

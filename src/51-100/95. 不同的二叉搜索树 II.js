@@ -44,13 +44,6 @@ function TreeNode(val, left, right) {
  */
 var generateTrees = function (n) {
   if (n === 0) return [];
-  const getBSTtrees = (n, dist) => {
-    const res = [];
-    let node = null;
-    for (let i = 1; i <= n; i++) {
-      const leftNodes = getBSTtrees(i - 1, dist);
-      const rightNodes = getBSTtrees(n - i, dist + i);
-    }
-  };
-  return getBSTtrees(n, 0)
+  if (n === 1) return new TreeNode(1);
+  
 };

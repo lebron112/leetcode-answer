@@ -13,7 +13,7 @@
 链接：https://leetcode-cn.com/problems/partition-list
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。 */
 
-const { arrToNode, nodeToArr } = require("../utils");
+const { arr2Node, node2Arr } = require("../utils");
 
 //  * Definition for singly-linked list.
 function ListNode(val) {
@@ -54,7 +54,7 @@ var partitionOld = function (head, x) {
     }
     head = next;
   }
-  // console.log(nodeToArr(left), nodeToArr(right),'----')
+  // console.log(node2Arr(left), node2Arr(right),'----')
   // 剔除比x小的 放入nodes里, 把大的拼接到head后面
   while (right) {
     if (right.val < x) {
@@ -65,7 +65,7 @@ var partitionOld = function (head, x) {
     }
     right = right.next;
   }
-  // console.log(nodeToArr(left), nodeToArr(right), nodes.length, '-');
+  // console.log(node2Arr(left), node2Arr(right), nodes.length, '-');
   // 接着，遍历nodes 生产一个全新的链。
   let insetNode = null;
   let insetHead = null;
@@ -80,7 +80,7 @@ var partitionOld = function (head, x) {
     }
   }
   // 把整个链重新插入到left里
-  // console.log(nodeToArr(insetNode), nodes.length, '--')
+  // console.log(node2Arr(insetNode), nodes.length, '--')
   if (insetNode) {
     const v = insetNode.val;
     if (left.val < v) {
@@ -105,7 +105,7 @@ var partitionOld = function (head, x) {
 
 /* 
 题目描述有问题 【你应当保留两个分区中每个节点的初始相对位置】，理解为，大于等于x的节点直接抽出来放到链表最后，
-这样题目就更简单了
+这样题目就更简单了, 直接进行分割，分成左右2个链， 左链的值都比x 小， 右链都大于等于x，最后把2个链拼接起来就行了
 */
 const partition = function (head, v) {
   let left = null;
@@ -142,17 +142,17 @@ const partition = function (head, v) {
   }
   return left || right;
 }
-console.log(nodeToArr(partition(arrToNode([1, 4, 3, 2, 5, 2]), 3)));
+console.log(node2Arr(partition(arr2Node([1, 4, 3, 2, 5, 2]), 3)));
 
-console.log(nodeToArr(partition(arrToNode([1, 4, 3, 0, 2, 5, 2]), 3)));// [1,0,2,2,4,3,5]
+console.log(node2Arr(partition(arr2Node([1, 4, 3, 0, 2, 5, 2]), 3)));// [1,0,2,2,4,3,5]
 
-console.log(nodeToArr(partition(arrToNode([2, 1]), 2)));
+console.log(node2Arr(partition(arr2Node([2, 1]), 2)));
 
-console.log(nodeToArr(partition(arrToNode([3, 2, 1]), 3)));
+console.log(node2Arr(partition(arr2Node([3, 2, 1]), 3)));
 
-console.log(nodeToArr(partition(arrToNode([3, 2, 1]), 2)));
+console.log(node2Arr(partition(arr2Node([3, 2, 1]), 2)));
 
-console.log(nodeToArr(partition(arrToNode([1, 4, 3, 9, 2, 5, 6, 8]), 9))); // [1,4,3,2,5,6,8,9]
+console.log(node2Arr(partition(arr2Node([1, 4, 3, 9, 2, 5, 6, 8]), 9))); // [1,4,3,2,5,6,8,9]
 
 
-console.log(nodeToArr(partition(arrToNode([1]), 0)));
+console.log(node2Arr(partition(arr2Node([1]), 0)));
