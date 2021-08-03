@@ -41,8 +41,36 @@ const arrToTree = (array) => {
 const testFn = (fn, ...args) => {
   console.log(fn(...args));
 };
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+const arrToNode = (array) => {
+  if (!array.length) return null;
+  let next = new Node(array.shift());
+  let head = next;
+  while (array.length) {
+    const node = new Node(array.shift());
+    next.next = node;
+    next = node;
+  }
+  return head;
+}
+
+const nodeToArr = (node) => {
+  const res = [];
+  while (node) {
+    res.push(node.val);
+    node = node.next;
+  }
+  return res;
+};
 
 module.exports = {
+  nodeToArr,
+  arrToNode,
   arrToTree,
   testFn,
 };
