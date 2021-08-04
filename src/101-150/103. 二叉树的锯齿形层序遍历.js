@@ -46,6 +46,7 @@ var zigzagLevelOrder = function (root) {
     while (len--) {
       const top = arr.shift();
       const { val, right, left } = top;
+      // 判断奇偶
       if (res.length % 2 === 1) {
         res[res.length - 1].push(val);
       } else {
