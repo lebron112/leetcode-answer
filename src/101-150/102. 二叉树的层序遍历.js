@@ -33,6 +33,47 @@
  * @param {TreeNode} root
  * @return {number[][]}
  */
- var levelOrder = function(root) {
+// 递归
+var levelOrder = function (root) {
+  const arr = [];
+  const mapTree = (tree, index) => {
+    if (tree) {
+      const { val, left, right } = tree;
+      if (!arr[index]) {
+        arr[index] = [];
+      }
+      arr[index].push(val);
+      mapTree(left, index + 1);
+      mapTree(right, index + 1);
+    }
+  };
+  mapTree(root, 0)
+  return arr;
+};
 
+
+/*
+  利用队列从上向下进行广度遍历，
+  可以得知，二叉树的广度遍历用队列，深度遍历用栈
+ */
+var levelOrder2 = function (root) {
+  const arr = [root];
+  if (!root) return [];
+  const res = [];
+  while (arr.length) {
+    res.push([]);
+    // 记录每一层的数量
+    let len = arr.length;
+    // 到层数用完时， 说明要要入下一层了，那么arr的长度，就是当前层数的总叶子数
+    while (len--) {
+      // 取出队头第一个值
+      const top = arr.shift();
+      const { val, left, right } = top;
+      res[res.length - 1].push(val);
+      // 丢入队尾
+      left && arr.push(left);
+      right && arr.push(right);
+    }
+  }
+  return res;
 };
