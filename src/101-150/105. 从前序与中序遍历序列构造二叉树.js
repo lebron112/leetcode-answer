@@ -66,3 +66,23 @@ var buildTree = function (preorder, inorder) {
   head.right = buildTree(nr, right);
   return head;
 };
+
+/* 递归优化  
+  无需删除前序遍历的左右分区子树，因为是重复操作
+*/
+var buildTree = function (preorder, inorder) {
+  if (!preorder.length || !inorder.length) return null;
+  const root = preorder.shift();
+  let i = 0;
+  for (; i < inorder.length; i++) {
+    if (inorder[i] === root) {
+      break;
+    }
+  }
+  let left = inorder.slice(0, i);
+  let right = inorder.slice(i + 1);
+  let head = new TreeNode(root);
+  head.left = buildTree(preorder, left);
+  head.right = buildTree(preorder, right);
+  return head;
+};
