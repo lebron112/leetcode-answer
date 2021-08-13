@@ -34,11 +34,32 @@ function TreeNode(val) {
  * @param {number} sum
  * @return {number[][]}
  */
+// 递归即可
+// 遍历到树枝节点, 计算存入数组中的总和是否等于目标值即可 easy~
 const pathSum = (root, sum) => {
   const res = [];
-  const reduceMap = (left, right, val) => {
-    
+  const reduceMap = (tree, arr) => {
+    const copy = [...arr];
+    if (tree) {
+      const { val, left, right } = tree;
+      copy.push(val);
+      // 树枝节点 计算路径的总和
+      if (!left && !right) {
+        const sums = copy.reduce((a, b) => a + b);
+        if (sums === sum) {
+          res.push(copy);
+        }
+      } else {
+        left && reduceMap(left, copy);
+        right && reduceMap(right, copy);
+      }
+    }
   };
-  return;
+  reduceMap(root, []);
+  return res;
 };
-console.log(arr2Tree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1]));//[[5,4,11,2], [5,8,4,5]]
+console.log(
+  pathSum(
+    arr2Tree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1]), 22
+  )
+);//[[5,4,11,2], [5,8,4,5]]
