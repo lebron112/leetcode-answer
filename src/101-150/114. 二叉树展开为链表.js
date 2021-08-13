@@ -50,18 +50,3 @@ var flatten = function (root) {
   root.left = null;
   return res;
 };
-
-var flatten = function (root) {
-  if (!root) return null;
-  const deepRoot = (root) => {
-    if (root) {
-      const { left, right } = root;
-      root.left = null;
-      root.right = left;
-      deepRoot(left);
-      root = root.right;
-      deepRoot(right);
-    }
-  };
-  deepRoot(root);
-};
