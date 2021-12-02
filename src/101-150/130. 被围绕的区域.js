@@ -29,10 +29,10 @@
 var solve = function (board) {
   const road = board.map(item => ([]));
   const checkDfs = (x, y, dir) => {
-    //  ↓ ↑ ← →
+    //  ↓ ↑ ← → 定义4个方向，每次不能进行回退
     if (dir === '↓') {
       dfs(x, y + 1, '↓');
-      dfs(x + 1, y , '→');
+      dfs(x + 1, y, '→');
       dfs(x - 1, y, '←');
     }
     if (dir === '↑') {
@@ -51,15 +51,19 @@ var solve = function (board) {
       dfs(x, y + 1, '↓');
     }
   };
+
   const dfs = (x, y, dir) => {
     if (y < 0 || y > board.length - 1) { return; }
     if (x < 0 || x > board[0].length - 1) { return; }
+    // 找到重复的不需要进行
     if (road[y][x] === 1) return;
+    // 找到和边界连接的，进行递归
     if (board[y][x] === 'O') {
       road[y][x] = 1;
       checkDfs(x, y, dir);
     }
   };
+  // 第一行从左向右
   for (let i = 0; i < board[0].length; i++) {
     const d = board[0][i];
     if (d === 'O') {
@@ -67,6 +71,7 @@ var solve = function (board) {
       checkDfs(i, 0, '↓');
     }
   }
+  // 最右列从上到下
   for (let i = 0; i < board[board.length - 1].length; i++) {
     const d = board[board.length - 1][i];
     if (d === 'O') {
@@ -74,6 +79,7 @@ var solve = function (board) {
       checkDfs(i, board.length - 1, '↑');
     }
   }
+  // 最后一行从左往右
   for (let i = 0; i < board.length; i++) {
     const d = board[i][board[0].length - 1];
     if (d === 'O') {
@@ -81,6 +87,7 @@ var solve = function (board) {
       checkDfs(board[0].length - 1, i, '←');
     }
   }
+  // 第一列从上到下
   for (let i = 0; i < board.length; i++) {
     const d = board[i][0];
     if (d === 'O') {
@@ -119,7 +126,7 @@ console.log(solve([
   ["X", "O", "X", "X"]
 ]))
 console.log(solve([
-  ["O", "O", "O", ],
-  ["O", "O", "O", ],
-  ["O", "O", "O", ],
+  ["O", "O", "O",],
+  ["O", "O", "O",],
+  ["O", "O", "O",],
 ]))
