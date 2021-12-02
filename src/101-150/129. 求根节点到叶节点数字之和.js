@@ -51,6 +51,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
+// 递归+计算即可
 var sumNumbers = function (root) {
   const nums = [];
   let max = 0;
@@ -59,6 +60,7 @@ var sumNumbers = function (root) {
     if (node) {
       const { left, right, val } = node;
       copyArr.unshift(val);
+      // 递归到没有左右节点时，说明时叶子节点
       if (!left && !right) {
         max = Math.max(max, copyArr.length);
         return nums.push(copyArr);
