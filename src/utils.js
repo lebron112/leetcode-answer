@@ -38,10 +38,6 @@ const arr2Tree = (array) => {
   return tree;
 };
 
-const tree2Arr = (tree) => {
-
-};
-
 const testFn = (fn, ...args) => {
   console.log(fn(...args));
 };
@@ -75,9 +71,29 @@ const node2Arr = (node) => {
   return res;
 };
 
+const findDifArray = (big, small) => {
+  if (small.length > big.length) {
+    [small, big] = [big, small];
+  }
+  const finds = big.filter(item => {
+    const str = item.join(',')
+    for (let i = 0; i < small.length; i++) {
+      const d = small[i].join(',');
+      if (str === d) {
+        small.splice(i, 1);
+        return false;
+      }
+    }
+    return true;
+  });
+
+  return finds;
+};
+
 module.exports = {
   node2Arr,
   arr2Node,
   arr2Tree,
   testFn,
+  findDifArray,
 };
