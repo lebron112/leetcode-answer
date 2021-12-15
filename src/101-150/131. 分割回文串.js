@@ -29,7 +29,6 @@ s 仅由小写英文字母组成
  */
 // bfs搜索
 // 循环，找出和【当前索引位的单词的第一个字】相同的下一个字母x，往x下一位为止开始找
-// 双指针，分左右同时开始
 var partition = function (s) {
   const res = [];
   const first = s.split('');
@@ -87,10 +86,6 @@ var partition = function (s) {
       bfsL2R(list, index + 1);
     }
   };
-
-  // for (let i = 0; i < first.length; i++) {
-  //   bfsL2R(first, i);
-  // }
   bfsL2R(first, 0);
   return res
 };

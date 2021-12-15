@@ -50,6 +50,82 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var preorderTraversal = function (root) {
-  
+// 递归版本
+var preorderTraversalEasy = function (root) {
+  const res = [];
+  const mapHead = (node) => {
+    if (node) {
+      const { val, left, right } = node;
+      res.push(val);
+      mapHead(left);
+      mapHead(right);
+    }
+  };
+  mapHead(root);
+  return res;
 };
+
+// 非递归版本 分左右队列，从左取出最后一个，右取出第一个，但是优先判断有左的进去左循环
+var preorderTraversal1 = function (root) {
+  const res = [];
+  const leftQueue = []; 
+  const rightQueue = [];
+  root && leftQueue.push(root);
+  while (leftQueue.length || rightQueue.length) {
+    while (leftQueue.length) {
+      const head = leftQueue.shift();
+      const { val, left, right } = head;
+      res.push(val);
+      if (left) leftQueue.push(left);
+      if (right) rightQueue.push(right);
+    }
+    loopRight: while (rightQueue.length) {
+      const head = rightQueue.pop();
+      const { val, left, right } = head;
+      res.push(val);
+      if (left) leftQueue.push(left);
+      if (right) rightQueue.push(right);
+      // 判断左
+      if (leftQueue.length) {
+        break loopRight;
+      }
+    }
+  }
+  return res;
+};
+
+// 第二版，优先存入右，可以保证栈顶一直是最左的
+const preorderTraversal = (root) => {
+  const list = [];
+  const res = [];
+  root && list.push(root);
+  while (list.length) {
+    const head = list.pop();
+    const { val, left, right } = head;
+    res.push(val);
+    if (right) list.push(right);
+    if (left) list.push(left);
+  }
+  return res;
+};
+
+console.log(preorderTraversal({
+  val: 3,
+  // left: { val: 1 },
+  right: {
+    val: 2,
+    left: { val: 1 },
+    right: { val: 4 }
+  }
+}));
+
+console.log(preorderTraversal({
+  val: 2,
+  left: {
+    val: 1,
+    left: { val: 3 },
+  },
+  right: {
+    val: 4,
+  }
+}))
