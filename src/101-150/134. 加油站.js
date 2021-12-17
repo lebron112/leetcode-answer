@@ -76,6 +76,7 @@ var canCompleteCircuitViolence = function (gas, cost) {
 };
 
 // 对cost消耗进行求和, 如果<0 则不能到达
+// 记录每次剩下的油耗，如果油耗< 0 则从下一站进行尝试
 const canCompleteCircuit = (gas, cost) => {
   let sum = 0; // 记录消耗差，如果差<0 则不能到达
   let res = 0; // 记录尝试剩下后的油耗
