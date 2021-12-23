@@ -70,7 +70,7 @@ var detectCycle = function (head) {
 
 // o(1) 空间 快慢指针，因为有环则 快慢指针必定会相交
 /* 
-
+数学问题
 slow * 2 = fast;
 slow = a + b;
 fast = a + b + c + b = a + 2*b + c;
