@@ -66,27 +66,33 @@ wordDict 中的所有字符串 互不相同
 // 第三次查钊 [0, 5, 1, 4] 
 // 这时候一级满足条件了找到了
 // 超时了 需要加一个记忆化hash 判断是否走过，走过则直接返回false；
-var wordBreak = function (s, wordDicts) {
+var wordBreakDfs = function (s, wordDicts) {
   const hash = new Map();
+  // 找打一个最短的字符串长度
   const min = Math.min(...wordDicts.map(item => item.length));
-  const checkout = (restStr) => {
+  const dfs = (restStr) => {
+    // 记忆化路径，如果有走过的路径，则直接返回fasle
     const has = hash.has(restStr);
     if (!has) {
       hash.set(restStr, 1);
     } else {
       return false;
     }
+    // dfs终止条件
     if (!restStr) return true;
+    // 当剩余字符串字数不够时，说明无法匹配上
     if (restStr.length < min) return false;
     const res = [];
     for (let i = 0; i < wordDicts.length; i++) {
       const w = wordDicts[i];
+      // 找出所有可能截断的结果
       const isOk = restStr.slice(0, w.length) === w;
       if (isOk) res.push(restStr.slice(w.length));
     }
     if (res.length) {
       for (let i = 0; i < res.length; i++) {
-        if (checkout(res[i])) return true;
+        // 递归
+        if (dfs(res[i])) return true;
       }
     }
     return false;
@@ -94,14 +100,34 @@ var wordBreak = function (s, wordDicts) {
 
   for (let i = 0; i < wordDicts.length; i++) {
     const w = wordDicts[i];
+    // 查找
     const isOk = s.slice(0, w.length) === w;
     if (isOk) {
-      const res = checkout(s.slice(w.length));
+      // 尝试进行深度搜索
+      const res = dfs(s.slice(w.length));
       if (res) return true;
     }
   }
   return false;
 }
+//  dp 动态规划 类似北保问题
+const wordBreak = (s, wordDicts) => {
+  const res = [true];
+  for (let i = 1; i <= s.length; i++) {
+    inLab: for (let j = 0; j < i; j++) {
+      const str = s.slice(j, i);
+      // 背包问题，如果可以匹配上，如果下一个也能匹配上，那么对应的索引位是true
+      if (res[j]) {
+        if (wordDicts.indexOf(str) > -1) {
+          res[i] = true;
+          break inLab;
+        }
+      }
+    }
+  }
+  return res[s.length ] === true;
+};
+
 console.log(wordBreak('leetcode', ['leet', 'code']))// true
 console.log(wordBreak('applepenapple', ["apple", "pen"]))// true
 console.log(wordBreak('catsandog', ["cats", "dog", "sand", "and", "cat"]))// false
